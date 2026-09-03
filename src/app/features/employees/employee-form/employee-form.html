@@ -1,0 +1,234 @@
+<div class="form-container">
+
+  <h2>
+    {{ isEditMode ? 'Edit Employee' : 'Add Employee' }}
+  </h2>
+
+  <div
+    class="state-container"
+    *ngIf="isLoading"
+  >
+    <mat-spinner></mat-spinner>
+    <p>Please wait...</p>
+  </div>
+
+  <div
+    class="success-message"
+    *ngIf="successMessage"
+  >
+    {{ successMessage }}
+  </div>
+
+  <div
+    class="error-message"
+    *ngIf="errorMessage"
+  >
+    {{ errorMessage }}
+  </div>
+
+  <form
+    [formGroup]="employeeForm"
+    (ngSubmit)="onSubmit()"
+    *ngIf="!isLoading"
+  >
+
+    <!-- NAME -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Name</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+        placeholder="Enter employee name"
+      />
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('name')?.hasError('required')
+        "
+      >
+        Name is required
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('name')?.hasError('minlength')
+        "
+      >
+        Name must be at least 3 characters
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- EMAIL -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Email</mat-label>
+
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        placeholder="Enter email"
+      />
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('email')?.hasError('required')
+        "
+      >
+        Email is required
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('email')?.hasError('email')
+        "
+      >
+        Enter a valid email address
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- MOBILE -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Mobile</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="mobile"
+        placeholder="Enter 10 digit mobile number"
+      />
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('mobile')?.hasError('required')
+        "
+      >
+        Mobile number is required
+      </mat-error>
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('mobile')?.hasError('pattern')
+        "
+      >
+        Mobile number must contain exactly 10 digits
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- COUNTRY -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Country</mat-label>
+
+      <mat-select formControlName="country">
+
+        <mat-option
+          *ngFor="let country of countries"
+          [value]="country"
+        >
+          {{ country }}
+        </mat-option>
+
+      </mat-select>
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('country')?.hasError('required')
+        "
+      >
+        Country is required
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- STATE -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>State</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="state"
+        placeholder="Enter state"
+      />
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('state')?.hasError('required')
+        "
+      >
+        State is required
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- DISTRICT -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>District</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="district"
+        placeholder="Enter district"
+      />
+
+      <mat-error
+        *ngIf="
+          employeeForm.get('district')?.hasError('required')
+        "
+      >
+        District is required
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- BUTTONS -->
+
+    <div class="button-container">
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        {{ isEditMode
+          ? 'Update Employee'
+          : 'Save Employee'
+        }}
+      </button>
+
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="resetForm()"
+      >
+        Reset
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

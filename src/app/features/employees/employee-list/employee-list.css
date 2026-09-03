@@ -1,0 +1,41 @@
+.employee-container {
+  padding: 24px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+button {
+  margin-right: 8px;
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.error-message {
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 6px;
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+}

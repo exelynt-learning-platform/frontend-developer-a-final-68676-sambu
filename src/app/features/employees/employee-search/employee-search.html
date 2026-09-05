@@ -1,0 +1,155 @@
+<div class="search-container">
+
+  <h2>Search Employee</h2>
+
+
+  <!-- Search Form -->
+
+  <form
+    [formGroup]="searchForm"
+    (ngSubmit)="searchEmployee()"
+  >
+
+    <mat-form-field
+      appearance="outline"
+      class="search-field"
+    >
+
+      <mat-label>Employee ID</mat-label>
+
+      <input
+        matInput
+        type="text"
+        formControlName="id"
+        placeholder="Enter employee ID"
+      />
+
+      <mat-error
+        *ngIf="
+          searchForm.get('id')?.hasError('required')
+        "
+      >
+        Employee ID is required
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <!-- Buttons -->
+
+    <div class="button-container">
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="isLoading"
+      >
+        Search
+      </button>
+
+
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="resetSearch()"
+        [disabled]="isLoading"
+      >
+        Reset
+      </button>
+
+    </div>
+
+  </form>
+
+
+  <!-- Loading -->
+
+  <div
+    class="state-container"
+    *ngIf="isLoading"
+  >
+
+    <mat-spinner></mat-spinner>
+
+    <p>Searching employee...</p>
+
+  </div>
+
+
+  <!-- Error -->
+
+  <div
+    class="error-message"
+    *ngIf="errorMessage"
+  >
+
+    {{ errorMessage }}
+
+  </div>
+
+
+  <!-- Employee Details -->
+
+  <div
+    class="employee-card"
+    *ngIf="employee"
+  >
+
+    <h3>Employee Details</h3>
+
+
+    <p>
+      <strong>ID:</strong>
+      {{ employee.id }}
+    </p>
+
+
+    <p>
+      <strong>Name:</strong>
+      {{ employee.name }}
+    </p>
+
+
+    <p>
+      <strong>Email:</strong>
+      {{ employee.email }}
+    </p>
+
+
+    <p>
+      <strong>Mobile:</strong>
+      {{ employee.mobile }}
+    </p>
+
+
+    <p>
+      <strong>Country:</strong>
+      {{ employee.country }}
+    </p>
+
+
+    <p>
+      <strong>State:</strong>
+      {{ employee.state }}
+    </p>
+
+
+    <p>
+      <strong>District:</strong>
+      {{ employee.district }}
+    </p>
+
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="editEmployee()"
+    >
+      Edit Employee
+    </button>
+
+  </div>
+
+</div>
